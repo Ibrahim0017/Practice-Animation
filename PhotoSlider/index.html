@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PhotoSelector</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="imgs-parent">
+        <div
+          class="img"
+          style="background-image: url(./asset/143272.jpg)"
+        ></div>
+        <div class="img" style="background-image: url(./asset/59960.jpg)"></div>
+        <div class="img" style="background-image: url(./asset/6116.jpg)"></div>
+        <div class="img" style="background-image: url(./asset/916.jpg)"></div>
+        <div class="img" style="background-image: url(./asset/ass.F.jpg)"></div>
+        <div
+          class="img"
+          style="background-image: url(./asset/assignment\ \ furniture.jpg)"
+        ></div>
+        <div
+          class="img"
+          style="
+            background-image: url(./asset/blue-armchair-against-blue-wall-living-room-interior-elegant-interior-design-with-copy-space-ai-generative.jpg);
+          "
+        ></div>
+        <div
+          class="img"
+          style="
+            background-image: url(./asset/html-css-collage-concept_23-2150061955.jpg);
+          "
+        ></div>
+        <div
+          class="img"
+          style="background-image: url(./asset/IMG_20231103_075605_932.jpg)"
+        ></div>
+        <div
+          class="img"
+          style="background-image: url(./asset/IMG_20231103_075606_202.jpg)"
+        ></div>
+        <div
+          class="img"
+          style="background-image: url(./asset/IMG_20231103_075606_268.jpg)"
+        ></div>
+        <div
+          class="img"
+          style="background-image: url(./asset/sofa-2-1.jpeg)"
+        ></div>
+        <div
+          class="img"
+          style="background-image: url(./asset/IMG_20231103_075606_202.jpg)"
+        ></div>
+      </div>
+    </div>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-shadow: border-box;
+      }
+      :root {
+        --transition: cubic-bezier(0.1, 0.7, 0, 1);
+      }
+      body {
+        background: linear-gradient(90deg, black, #333);
+      }
+      .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .imgs-parent {
+        display: flex;
+        gap: 0.4rem;
+        perspective: 60rem;
+      }
+      .img {
+        width: 5.4rem;
+        height: 21rem;
+        background-size: cover;
+        background-position: center;
+        cursor: pointer;
+        transition: transform 1.25s var(--transition) filter 3s
+          var(--transition) width 0.3s var(--transition);
+        position: relative;
+        filter: grayscale(1) brightness(0.5);
+        will-change: transform, filter;
+      }
+      .img:hover {
+        transform: translateZ(17.375rem);
+        filter: inherit;
+      }
+      .img:hover + * {
+        transform: translateZ(14.77rem) rotateY(35deg);
+        z-index: -1;
+        filter: grayscale(0.2) brightness(0.9);
+      }
+      .img:hover + * + * {
+        transform: translateZ(7.73rem) rotateY(40deg);
+        z-index: -2;
+        filter: grayscale(0.4) brightness(0.8);
+      }
+      .img:hover + * + * + * {
+        transform: translateZ(4.17rem) rotateY(35deg);
+        z-index: -3;
+        filter: grayscale(0.6) brightness(0.7);
+      }
+      .img:hover + * + * + * + * {
+        transform: translateZ(1.1rem) rotateY(25deg);
+        z-index: -4;
+        filter: grayscale(0.8) brightness(0.6);
+      }
+      .img:has(+ :hover) {
+        transform: translateZ(14.77rem) rotateY(-35deg);
+        filter: grayscale(0.2) brightness(0.9);
+      }
+      .img:has(+ * + :hover) {
+        transform: translateZ(14.77rem) rotateY(-40deg);
+        filter: grayscale(0.4) brightness(0.8);
+      }
+      .img:has(+ * + * + :hover) {
+        transform: translateZ(14.77rem) rotateY(-35deg);
+        filter: grayscale(0.6) brightness(0.7);
+      }
+      .img:has(+ * + * + * + :hover) {
+        transform: translateZ(14.77rem) rotateY(-25deg);
+        filter: grayscale(0.8) brightness(0.6);
+      }
+      .img::before,
+      .img::after {
+        content: "";
+        position: absolute;
+        width: 1.25rem;
+        height: 100%;
+        right: -1.25rem;
+      }
+      .img::after {
+        left: -1.25rem;
+      }
+      .open {
+        width: 25vw;
+        transform: translateZ(17.375rem);
+        filter: inherit;
+        z-index: 1;
+        margin: 0 0.45vw;
+      }
+    </style>
+
+    <script>
+      document.body.addEventListener("click", (event) => {
+        const clickedElement = event.target,
+          imgs = document.querySelectorAll("img");
+
+        if (!clickedElement.classList.contains("img")) {
+          imgs.forEach((img) => img.classList.remove("open"));
+          return;
+        }
+        if (clickedElement.classList.contains("open")) {
+          clickedElement.classList.remove("open");
+          return;
+        }
+
+        imgs.forEach((img) => img.classList.remove("open"));
+        clickedElement.classList.add("open")
+      });
+    </script>
+  </body>
+</html>

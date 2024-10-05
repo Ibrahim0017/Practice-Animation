@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 style="text-align: center">Thing I like And Also Do</h1>
+
+    <div class="scroller">
+      <ul class="tag-list scroller__inner">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JS</li>
+        <li>SSG</li>
+        <li>DATA</li>
+        <li>GAME</li>
+        <li>ANIMATION</li>
+        <li>UI/UX</li>
+      </ul>
+    </div>
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        color: white;
+        background-color: rgb(46, 68, 134);
+        font-family: 'poppins', sans-serif;
+      }
+      body {
+        padding: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      h1{
+        font-size: clamp(25px, 2vw, 45px);
+      }
+      .tag-list {
+        margin: 0;
+        padding-inline: 0;
+        list-style: none;
+      }
+      .tag-list li {
+        padding: 1rem;
+        background: rgb(18, 45, 75);
+        border-radius: 0.5rem;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        color: whitesmoke;
+        align-self: center;
+      }
+      .scroller {
+        max-width: 400px;
+        /* outline: 3px solid lime; */
+        /* overflow: hidden; */
+      }
+
+      .scroller__inner {
+        padding-block: 1rem;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .scroller[data-animated="true"] {
+        /* border: 5px solid lime; */
+        overflow: hidden;
+        -webkit-mask: linear-gradient(
+          90deg,
+          transparent,
+          white 20%,
+          white 80%,
+          transparent
+        );
+        mask: linear-gradient(
+          90deg,
+          transparent,
+          white 20%,
+          white 80%,
+          transparent
+        );
+      }
+
+      .scroller[data-animated="true"] .scroller__inner {
+        width: max-content;
+        flex-wrap: nowrap;
+        animation: scroll 20s linear infinite;
+      }
+
+      @keyframes scroll {
+        to {
+          transform: translate(calc(-50% - 0.5rem));
+        }
+      }
+    </style>
+
+    <script>
+      const scrollers = document.querySelectorAll(".scroller");
+
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        addAnimation();
+      }
+
+      function addAnimation() {
+        scrollers.forEach((scroller) => {
+          scroller.setAttribute("data-animated", true);
+
+          const scrollerInner = scroller.querySelector(".scroller__inner");
+          const scrollerContent = Array.from(scrollerInner.children);
+
+          console.log(scrollerContent)
+
+          scrollerContent.forEach(item => {
+            const duplicatedItem = item.cloneNode(true);
+            duplicatedItem.setAttribute("aria-hidden", true);
+            scrollerInner.appendChild(duplicatedItem);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
